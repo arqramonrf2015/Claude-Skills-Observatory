@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0.0",
+  "generated_on": "2026-07-30",
+  "total_skills": 6,
+  "verified_skills": 6,
+  "categories": [
+    {
+      "id": "development",
+      "count": 1,
+      "skill_ids": [
+        "anthropic-claude-api"
+      ]
+    },
+    {
+      "id": "documents",
+      "count": 4,
+      "skill_ids": [
+        "anthropic-docx",
+        "anthropic-pdf",
+        "anthropic-pptx",
+        "anthropic-xlsx"
+      ]
+    },
+    {
+      "id": "skill-development",
+      "count": 1,
+      "skill_ids": [
+        "anthropic-skill-creator"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "anthropic-skill-creator",
+      "name": "skill-creator",
+      "display_name": "Skill Creator",
+      "summary_en": "Creates, evaluates, improves and packages Agent Skills through an iterative workflow.",
+      "summary_pt": "Cria, avalia, melhora e empacota Agent Skills por meio de um fluxo iterativo.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "skill-development",
+      "subcategory": "authoring-and-evaluation",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/skill-creator/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+      "source_blob_sha": "65b3a402dbd09b8e83f9d637c6b553875189085c",
+      "license": "See upstream repository terms",
+      "license_class": "upstream-specific",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "agents",
+        "scripts"
+      ],
+      "capabilities": [
+        "create skills",
+        "edit skills",
+        "evaluate skills",
+        "optimize triggering",
+        "package skills"
+      ],
+      "tags": [
+        "agent-skills",
+        "authoring",
+        "evaluation",
+        "automation"
+      ],
+      "verified_on": "2026-07-30"
+    },
+    {
+      "id": "anthropic-claude-api",
+      "name": "claude-api",
+      "display_name": "Claude API",
+      "summary_en": "Reference workflow for building, debugging and optimizing applications with the Claude API and Anthropic SDKs.",
+      "summary_pt": "Fluxo de referência para criar, depurar e otimizar aplicações com a API Claude e os SDKs da Anthropic.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "development",
+      "subcategory": "api-and-sdk",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/claude-api/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/claude-api/SKILL.md",
+      "source_blob_sha": "6ddbf0b48d0a55a3065ae870556c9d77fc310a58",
+      "license": "Complete terms in upstream LICENSE.txt",
+      "license_class": "upstream-specific",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "language references",
+        "shared references"
+      ],
+      "capabilities": [
+        "Claude API",
+        "Anthropic SDKs",
+        "tool use",
+        "prompt caching",
+        "model migration",
+        "agents"
+      ],
+      "tags": [
+        "claude-api",
+        "sdk",
+        "agents",
+        "mcp",
+        "tool-use"
+      ],
+      "verified_on": "2026-07-30"
+    },
+    {
+      "id": "anthropic-docx",
+      "name": "docx",
+      "display_name": "DOCX",
+      "summary_en": "Creates, reads, edits and analyzes Microsoft Word documents and templates.",
+      "summary_pt": "Cria, lê, edita e analisa documentos e modelos do Microsoft Word.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "documents",
+      "subcategory": "word-processing",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/docx/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/docx/SKILL.md",
+      "source_blob_sha": "fb954a460a1ea2294e9595e87fecce8df043eeba",
+      "license": "Proprietary; complete terms in upstream LICENSE.txt",
+      "license_class": "source-available",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "references",
+        "scripts"
+      ],
+      "capabilities": [
+        "create DOCX",
+        "edit DOCX",
+        "analyze DOCX",
+        "templates",
+        "tracked changes"
+      ],
+      "tags": [
+        "documents",
+        "docx",
+        "word",
+        "office"
+      ],
+      "verified_on": "2026-07-30"
+    },
+    {
+      "id": "anthropic-pdf",
+      "name": "pdf",
+      "display_name": "PDF",
+      "summary_en": "Processes PDF files, including extraction, creation, merging, splitting, forms and OCR workflows.",
+      "summary_pt": "Processa arquivos PDF, incluindo extração, criação, união, divisão, formulários e fluxos de OCR.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "documents",
+      "subcategory": "pdf-processing",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/pdf/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/pdf/SKILL.md",
+      "source_blob_sha": "d3e046a5ae107a6cb23cfb16c219837094ab35d3",
+      "license": "Proprietary; complete terms in upstream LICENSE.txt",
+      "license_class": "source-available",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "references",
+        "scripts"
+      ],
+      "capabilities": [
+        "read PDF",
+        "create PDF",
+        "merge PDF",
+        "split PDF",
+        "forms",
+        "OCR"
+      ],
+      "tags": [
+        "documents",
+        "pdf",
+        "ocr",
+        "forms"
+      ],
+      "verified_on": "2026-07-30"
+    },
+    {
+      "id": "anthropic-pptx",
+      "name": "pptx",
+      "display_name": "PPTX",
+      "summary_en": "Creates, reads, edits and analyzes PowerPoint presentations and templates.",
+      "summary_pt": "Cria, lê, edita e analisa apresentações e modelos do PowerPoint.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "documents",
+      "subcategory": "presentations",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/pptx/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+      "source_blob_sha": "41cd2306977f269bb1d8169a9643b35053aa66bd",
+      "license": "Proprietary; complete terms in upstream LICENSE.txt",
+      "license_class": "source-available",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "references",
+        "scripts",
+        "assets"
+      ],
+      "capabilities": [
+        "create PPTX",
+        "edit PPTX",
+        "analyze PPTX",
+        "templates",
+        "speaker notes"
+      ],
+      "tags": [
+        "documents",
+        "pptx",
+        "presentations",
+        "slides"
+      ],
+      "verified_on": "2026-07-30"
+    },
+    {
+      "id": "anthropic-xlsx",
+      "name": "xlsx",
+      "display_name": "XLSX",
+      "summary_en": "Creates, reads, edits, cleans and analyzes spreadsheet files and tabular data.",
+      "summary_pt": "Cria, lê, edita, limpa e analisa planilhas e dados tabulares.",
+      "origin": "official",
+      "publisher": "Anthropic",
+      "category": "documents",
+      "subcategory": "spreadsheets",
+      "status": "verified",
+      "source_repository": "anthropics/skills",
+      "source_path": "skills/xlsx/SKILL.md",
+      "source_url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/SKILL.md",
+      "source_blob_sha": "9da54804cc8c938586f89363c8da3b3a6e2a563d",
+      "license": "Proprietary; complete terms in upstream LICENSE.txt",
+      "license_class": "source-available",
+      "required_files": [
+        "SKILL.md"
+      ],
+      "bundled_resources": [
+        "references",
+        "scripts"
+      ],
+      "capabilities": [
+        "create spreadsheets",
+        "edit spreadsheets",
+        "formulas",
+        "charts",
+        "data cleaning"
+      ],
+      "tags": [
+        "documents",
+        "xlsx",
+        "spreadsheets",
+        "data"
+      ],
+      "verified_on": "2026-07-30"
+    }
+  ]
+}

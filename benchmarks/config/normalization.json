@@ -1,0 +1,30 @@
+{
+  "normalization": {
+    "method": "min_max",
+    "display_scale": 100,
+    "equal_values_score": 0.5
+  },
+  "ranking": {
+    "include_provenance": [
+      "independent",
+      "official",
+      "community"
+    ],
+    "exclude_reproducibility": [
+      "failed"
+    ],
+    "allow_estimated": false,
+    "score_precision": 2,
+    "tie_precision": 2
+  },
+  "selection_priority": {
+    "provenance": {
+      "independent": 1,
+      "community": 2,
+      "official": 3,
+      "synthetic": 4,
+      "estimated": 5
+    },
+    "prefer_latest_evaluation": true
+  }
+}

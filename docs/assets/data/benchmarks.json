@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-30",
+  "data_notice": "Synthetic data for pipeline testing only. Do not publish as real benchmark evidence.",
+  "cards": [
+    {
+      "category_id": "reasoning",
+      "category_label": "Reasoning",
+      "leader": {
+        "model_id": "example-model-alpha",
+        "model_name": "Example Model Alpha",
+        "provider": "Example Provider",
+        "score": 100.0,
+        "coverage": 1.0,
+        "metric_count": 1,
+        "status": "ranked",
+        "rank": 1
+      },
+      "ranked_models": 2
+    },
+    {
+      "category_id": "latency",
+      "category_label": "Latency",
+      "leader": {
+        "model_id": "example-model-beta",
+        "model_name": "Example Model Beta",
+        "provider": "Example Provider",
+        "score": 100.0,
+        "coverage": 1.0,
+        "metric_count": 1,
+        "status": "ranked",
+        "rank": 1
+      },
+      "ranked_models": 2
+    }
+  ],
+  "categories": {
+    "reasoning": {
+      "label": "Reasoning",
+      "rankings": [
+        {
+          "model_id": "example-model-alpha",
+          "model_name": "Example Model Alpha",
+          "provider": "Example Provider",
+          "score": 100.0,
+          "coverage": 1.0,
+          "metric_count": 1,
+          "status": "ranked",
+          "rank": 1
+        },
+        {
+          "model_id": "example-model-beta",
+          "model_name": "Example Model Beta",
+          "provider": "Example Provider",
+          "score": 0.0,
+          "coverage": 1.0,
+          "metric_count": 1,
+          "status": "ranked",
+          "rank": 2
+        }
+      ],
+      "unranked": []
+    },
+    "latency": {
+      "label": "Latency",
+      "rankings": [
+        {
+          "model_id": "example-model-beta",
+          "model_name": "Example Model Beta",
+          "provider": "Example Provider",
+          "score": 100.0,
+          "coverage": 1.0,
+          "metric_count": 1,
+          "status": "ranked",
+          "rank": 1
+        },
+        {
+          "model_id": "example-model-alpha",
+          "model_name": "Example Model Alpha",
+          "provider": "Example Provider",
+          "score": 0.0,
+          "coverage": 1.0,
+          "metric_count": 1,
+          "status": "ranked",
+          "rank": 2
+        }
+      ],
+      "unranked": []
+    }
+  }
+}

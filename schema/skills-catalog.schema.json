@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claude Skills Observatory Skills Catalog",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "catalog_name",
+    "generated_on",
+    "record_count",
+    "skills"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "catalog_name": {
+      "type": "string"
+    },
+    "generated_on": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "language_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "notice": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "display_name",
+          "summary_en",
+          "summary_pt",
+          "origin",
+          "publisher",
+          "category",
+          "subcategory",
+          "status",
+          "source_repository",
+          "source_path",
+          "source_url",
+          "source_blob_sha",
+          "license",
+          "license_class",
+          "required_files",
+          "bundled_resources",
+          "capabilities",
+          "tags",
+          "verified_on"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary_en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary_pt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "origin": {
+            "enum": [
+              "official",
+              "partner",
+              "community",
+              "custom",
+              "research"
+            ]
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subcategory": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "review",
+              "draft",
+              "deprecated",
+              "archived"
+            ]
+          },
+          "source_repository": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "source_blob_sha": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license_class": {
+            "enum": [
+              "open-source",
+              "source-available",
+              "upstream-specific",
+              "unknown"
+            ]
+          },
+          "required_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "bundled_resources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "verified_on": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        }
+      }
+    }
+  }
+}

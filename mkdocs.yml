@@ -1,0 +1,112 @@
+site_name: Claude Skills Observatory
+site_description: Open technical observatory for Claude Skills, MCPs, APIs, benchmarks and AI documentation.
+site_author: Ramon Ribeiro Fontes
+site_url: https://arqramonrf2015.github.io/Claude-Skills-Observatory/
+repo_name: arqramonrf2015/Claude-Skills-Observatory
+repo_url: https://github.com/arqramonrf2015/Claude-Skills-Observatory
+edit_uri: edit/main/docs/
+copyright: © 2026 Ramon Ribeiro Fontes
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+plugins:
+  - search:
+      lang:
+        - en
+        - pt
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
+
+extra_css:
+  - assets/stylesheets/custom.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+  - assets/javascripts/mermaid-init.js
+  - assets/javascripts/portal.js
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/arqramonrf2015
+
+nav:
+  - Portal: index.md
+  - English:
+      - Overview: en/index.md
+      - Dashboard: en/dashboard/index.md
+      - Skills:
+          - Introduction: en/skills/index.md
+          - Live Catalog: en/skills/catalog.md
+          - Anatomy: en/skills/anatomy.md
+      - Benchmarks: en/benchmarks/index.md
+      - Roadmap: en/roadmap/index.md
+      - About: en/about/index.md
+  - Português:
+      - Visão geral: pt/index.md
+      - Dashboard: pt/dashboard/index.md
+      - Skills:
+          - Introdução: pt/skills/index.md
+          - Catálogo interativo: pt/skills/catalog.md
+          - Anatomia: pt/skills/anatomy.md
+      - Benchmarks: pt/benchmarks/index.md
+      - Roadmap: pt/roadmap/index.md
+      - Sobre: pt/about/index.md

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "notice": "Synthetic data for pipeline testing only. Do not publish as real benchmark evidence.",
+  "results": [
+    {
+      "id": "synthetic-reasoning-alpha",
+      "benchmark_id": "example-reasoning-benchmark",
+      "benchmark_version": "1.0",
+      "category": "reasoning",
+      "metric_id": "reasoning_accuracy",
+      "metric_direction": "higher_is_better",
+      "score": 82.0,
+      "unit": "percent",
+      "model_id": "example-model-alpha",
+      "model_version": "alpha-2026-01",
+      "evaluation_date": "2026-03-01",
+      "provenance": "synthetic",
+      "source": {
+        "title": "Synthetic pipeline test",
+        "url": "https://example.invalid/synthetic"
+      },
+      "reproducibility": {
+        "status": "not_attempted"
+      }
+    },
+    {
+      "id": "synthetic-reasoning-beta",
+      "benchmark_id": "example-reasoning-benchmark",
+      "benchmark_version": "1.0",
+      "category": "reasoning",
+      "metric_id": "reasoning_accuracy",
+      "metric_direction": "higher_is_better",
+      "score": 74.0,
+      "unit": "percent",
+      "model_id": "example-model-beta",
+      "model_version": "beta-2026-02",
+      "evaluation_date": "2026-03-01",
+      "provenance": "synthetic",
+      "source": {
+        "title": "Synthetic pipeline test",
+        "url": "https://example.invalid/synthetic"
+      },
+      "reproducibility": {
+        "status": "not_attempted"
+      }
+    },
+    {
+      "id": "synthetic-latency-alpha",
+      "benchmark_id": "example-latency-benchmark",
+      "benchmark_version": "1.0",
+      "category": "latency",
+      "metric_id": "first_token_latency_ms",
+      "metric_direction": "lower_is_better",
+      "score": 480.0,
+      "unit": "milliseconds",
+      "model_id": "example-model-alpha",
+      "model_version": "alpha-2026-01",
+      "evaluation_date": "2026-03-01",
+      "provenance": "synthetic",
+      "source": {
+        "title": "Synthetic pipeline test",
+        "url": "https://example.invalid/synthetic"
+      },
+      "reproducibility": {
+        "status": "not_attempted"
+      }
+    },
+    {
+      "id": "synthetic-latency-beta",
+      "benchmark_id": "example-latency-benchmark",
+      "benchmark_version": "1.0",
+      "category": "latency",
+      "metric_id": "first_token_latency_ms",
+      "metric_direction": "lower_is_better",
+      "score": 320.0,
+      "unit": "milliseconds",
+      "model_id": "example-model-beta",
+      "model_version": "beta-2026-02",
+      "evaluation_date": "2026-03-01",
+      "provenance": "synthetic",
+      "source": {
+        "title": "Synthetic pipeline test",
+        "url": "https://example.invalid/synthetic"
+      },
+      "reproducibility": {
+        "status": "not_attempted"
+      }
+    }
+  ]
+}

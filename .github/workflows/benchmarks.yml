@@ -1,0 +1,48 @@
+name: Benchmark pipeline
+
+on:
+  pull_request:
+    paths:
+      - "benchmarks/**"
+      - "scripts/benchmark/**"
+      - ".github/workflows/benchmarks.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "benchmarks/**"
+      - "scripts/benchmark/**"
+      - ".github/workflows/benchmarks.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate benchmark data
+        run: python scripts/benchmark/validate_results.py
+
+      - name: Generate rankings
+        run: python scripts/benchmark/generate_rankings.py
+
+      - name: Export dashboard data
+        run: python scripts/benchmark/export_dashboard_data.py
+
+      - name: Upload generated benchmark artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-generated-data
+          path: |
+            benchmarks/generated/
+            dashboards/benchmarks/data/

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "models": [
+    {
+      "id": "example-model-alpha",
+      "display_name": "Example Model Alpha",
+      "provider": "Example Provider",
+      "family": "Example",
+      "exact_version": "alpha-2026-01",
+      "release_date": "2026-01-15",
+      "status": "example_only",
+      "modalities": [
+        "text"
+      ],
+      "aliases": [
+        "alpha"
+      ]
+    },
+    {
+      "id": "example-model-beta",
+      "display_name": "Example Model Beta",
+      "provider": "Example Provider",
+      "family": "Example",
+      "exact_version": "beta-2026-02",
+      "release_date": "2026-02-10",
+      "status": "example_only",
+      "modalities": [
+        "text"
+      ],
+      "aliases": [
+        "beta"
+      ]
+    }
+  ]
+}

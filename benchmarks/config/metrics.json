@@ -1,0 +1,48 @@
+{
+  "categories": {
+    "reasoning": {
+      "label": "Reasoning",
+      "minimum_coverage": 0.6,
+      "metrics": {
+        "reasoning_accuracy": {
+          "label": "Reasoning accuracy",
+          "direction": "higher_is_better",
+          "weight": 1.0
+        }
+      }
+    },
+    "coding": {
+      "label": "Coding",
+      "minimum_coverage": 0.6,
+      "metrics": {
+        "coding_pass_rate": {
+          "label": "Coding pass rate",
+          "direction": "higher_is_better",
+          "weight": 1.0
+        }
+      }
+    },
+    "latency": {
+      "label": "Latency",
+      "minimum_coverage": 0.5,
+      "metrics": {
+        "first_token_latency_ms": {
+          "label": "First-token latency",
+          "direction": "lower_is_better",
+          "weight": 1.0
+        }
+      }
+    },
+    "cost_efficiency": {
+      "label": "Cost efficiency",
+      "minimum_coverage": 0.5,
+      "metrics": {
+        "cost_per_task_usd": {
+          "label": "Cost per completed task",
+          "direction": "lower_is_better",
+          "weight": 1.0
+        }
+      }
+    }
+  }
+}

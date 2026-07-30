@@ -1,0 +1,17 @@
+{
+  "project": "Claude Skills Observatory",
+  "version": "0.1.0",
+  "release_status": "release-candidate",
+  "repository": "arqramonrf2015/Claude-Skills-Observatory",
+  "site_url": "https://arqramonrf2015.github.io/Claude-Skills-Observatory/",
+  "generated_on": "2026-07-30",
+  "contents": [
+    "MkDocs Material portal",
+    "English and Portuguese documentation",
+    "Skills catalog",
+    "Benchmark pipeline",
+    "Interactive dashboards",
+    "GitHub Pages workflows",
+    "Quality and security checks"
+  ]
+}
