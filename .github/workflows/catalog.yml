@@ -6,18 +6,20 @@ on:
       - "data/skills/**"
       - "schema/**"
       - "scripts/catalog/**"
-      - "docs/en/skills/**"
-      - "docs/pt/skills/**"
+      - "dashboards/skills/**"
+      - "docs/assets/data/skills.json"
       - ".github/workflows/catalog.yml"
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "data/skills/**"
       - "schema/**"
       - "scripts/catalog/**"
-      - "docs/en/skills/**"
-      - "docs/pt/skills/**"
+      - "dashboards/skills/**"
+      - "docs/assets/data/skills.json"
       - ".github/workflows/catalog.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -25,14 +27,25 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Validate catalog
         run: python scripts/catalog/validate_skills.py
-      - name: Regenerate catalog pages
+
+      - name: Regenerate catalog data
         run: python scripts/catalog/generate_skill_index.py
-      - name: Confirm generated files are current
-        run: git diff --exit-code
+
+      - name: Synchronize portal data
+        run: python scripts/portal/build_portal_data.py
+
+      - name: Confirm generated data is current
+        run: |
+          git diff --exit-code --             dashboards/skills/data/skills-catalog.json             docs/assets/data/skills.json
