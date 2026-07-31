@@ -7,7 +7,7 @@ translation_status: complete
 
 # Catálogo Interativo de Skills
 
-Filtre o catálogo inicial estruturado por nome, categoria, capacidade ou tag.
+Use o campo **“Pesquisar Skills por assunto, nome, capacidade ou tag”** que aparecerá logo abaixo. A busca do cabeçalho do site pesquisa apenas as páginas da documentação.
 
 <div class="cso-skills-catalog" data-lang="pt"></div>
 

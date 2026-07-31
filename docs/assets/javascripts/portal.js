@@ -1,30 +1,68 @@
 (() => {
   'use strict';
 
-  const script = Array.from(document.scripts).find((item) => item.src.includes('/portal.js'));
-  const assetsBase = script ? script.src.replace(/javascripts\/portal\.js.*$/, '') : '../../assets/';
-  const dataUrl = (name) => `${assetsBase}data/${name}`;
+  const script = Array.from(document.scripts).find(
+    (item) => item.src.includes('/assets/javascripts/portal.js')
+  );
+
+  const assetsBase = script
+    ? script.src.replace(/javascripts\/portal\.js.*$/, '')
+    : new URL('../../assets/', window.location.href).href;
+
+  const dataUrl = (name) => new URL(`data/${name}`, assetsBase).href;
 
   const labels = {
     en: {
-      skills: 'Catalogued Skills', verified: 'Verified records', categories: 'Skill categories', benchmarkCategories: 'Benchmark categories',
-      categoryDistribution: 'Skills by category', benchmarkSnapshot: 'Benchmark pipeline snapshot', search: 'Search by name, capability or tag',
-      allCategories: 'All categories', name: 'Skill', category: 'Category', summary: 'Summary', status: 'Status', source: 'Source',
-      noResults: 'No Skills match the selected filters.', updated: 'Data updated', synthetic: 'Synthetic benchmark data — pipeline demonstration only.',
-      leader: 'Pipeline leader', models: 'ranked models'
+      skills: 'Catalogued Skills',
+      verified: 'Verified records',
+      categories: 'Skill categories',
+      benchmarkCategories: 'Benchmark categories',
+      categoryDistribution: 'Skills by category',
+      benchmarkSnapshot: 'Benchmark pipeline snapshot',
+      search: 'Search Skills by subject, name, capability or tag',
+      allCategories: 'All categories',
+      name: 'Skill',
+      category: 'Category',
+      summary: 'Summary',
+      status: 'Status',
+      source: 'Source',
+      noResults: 'No Skills match the selected filters.',
+      updated: 'Data updated',
+      synthetic: 'Synthetic benchmark data — pipeline demonstration only.',
+      leader: 'Pipeline leader',
+      models: 'ranked models',
+      loading: 'Loading Skills catalog…',
+      loadError: 'The catalog could not be loaded. Refresh the page with Ctrl+F5.'
     },
     pt: {
-      skills: 'Skills catalogadas', verified: 'Registros verificados', categories: 'Categorias de Skills', benchmarkCategories: 'Categorias de benchmark',
-      categoryDistribution: 'Skills por categoria', benchmarkSnapshot: 'Visão do pipeline de benchmarks', search: 'Buscar por nome, capacidade ou tag',
-      allCategories: 'Todas as categorias', name: 'Skill', category: 'Categoria', summary: 'Resumo', status: 'Status', source: 'Fonte',
-      noResults: 'Nenhuma Skill corresponde aos filtros selecionados.', updated: 'Dados atualizados', synthetic: 'Dados sintéticos de benchmark — apenas demonstração do pipeline.',
-      leader: 'Líder do pipeline', models: 'modelos ranqueados'
+      skills: 'Skills catalogadas',
+      verified: 'Registros verificados',
+      categories: 'Categorias de Skills',
+      benchmarkCategories: 'Categorias de benchmark',
+      categoryDistribution: 'Skills por categoria',
+      benchmarkSnapshot: 'Visão do pipeline de benchmarks',
+      search: 'Pesquisar Skills por assunto, nome, capacidade ou tag',
+      allCategories: 'Todas as categorias',
+      name: 'Skill',
+      category: 'Categoria',
+      summary: 'Resumo',
+      status: 'Status',
+      source: 'Fonte',
+      noResults: 'Nenhuma Skill corresponde aos filtros selecionados.',
+      updated: 'Dados atualizados',
+      synthetic: 'Dados sintéticos de benchmark — apenas demonstração do pipeline.',
+      leader: 'Líder do pipeline',
+      models: 'modelos ranqueados',
+      loading: 'Carregando o catálogo de Skills…',
+      loadError: 'Não foi possível carregar o catálogo. Atualize a página com Ctrl+F5.'
     }
   };
 
   const loadJson = async (name) => {
     const response = await fetch(dataUrl(name), { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Unable to load ${name}: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Unable to load ${name}: HTTP ${response.status}`);
+    }
     return response.json();
   };
 
@@ -35,10 +73,17 @@
     return node;
   };
 
-  const titleCase = (value = '') => value
-    .split(/[-_]/)
-    .map((part) => part ? part[0].toUpperCase() + part.slice(1) : part)
-    .join(' ');
+  const titleCase = (value = '') =>
+    value
+      .split(/[-_]/)
+      .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : part))
+      .join(' ');
+
+  const normalizeText = (value = '') =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
 
   const uniqueRankedModels = (benchmarkData) => {
     const ids = new Set();
@@ -68,30 +113,48 @@
 
       const kpis = el('div', 'cso-kpis');
       kpis.append(
-        makeKpi(t.skills, skills.total_skills ?? skills.skills?.length ?? 0, t.updated + ': ' + (skills.generated_on || '—')),
+        makeKpi(
+          t.skills,
+          skills.total_skills ?? skills.skills?.length ?? 0,
+          `${t.updated}: ${skills.generated_on || '—'}`
+        ),
         makeKpi(t.verified, skills.verified_skills ?? 0),
         makeKpi(t.categories, skills.categories?.length ?? 0),
-        makeKpi(t.benchmarkCategories, Object.keys(benchmarks.categories || {}).length, `${uniqueRankedModels(benchmarks)} ${t.models}`)
+        makeKpi(
+          t.benchmarkCategories,
+          Object.keys(benchmarks.categories || {}).length,
+          `${uniqueRankedModels(benchmarks)} ${t.models}`
+        )
       );
       container.append(kpis);
 
       const grid = el('div', 'cso-grid');
-
       const distribution = el('section', 'cso-panel');
       distribution.style.gridColumn = 'span 7';
+
       const distributionHeader = el('div', 'cso-panel__header');
       const headerText = el('div');
       headerText.append(el('h2', '', t.categoryDistribution));
-      headerText.append(el('p', '', `${skills.total_skills || 0} ${t.skills.toLowerCase()}`));
+      headerText.append(
+        el('p', '', `${skills.total_skills || 0} ${t.skills.toLowerCase()}`)
+      );
       distributionHeader.append(headerText);
       distribution.append(distributionHeader);
 
       const bars = el('div', 'cso-bars');
-      const maximum = Math.max(1, ...(skills.categories || []).map((item) => item.count));
+      const maximum = Math.max(
+        1,
+        ...(skills.categories || []).map((item) => item.count)
+      );
+
       (skills.categories || []).forEach((item) => {
         const row = el('div', 'cso-bar');
         const top = el('div', 'cso-bar__top');
-        top.append(el('span', '', titleCase(item.id)), el('strong', '', String(item.count)));
+        top.append(
+          el('span', '', titleCase(item.id)),
+          el('strong', '', String(item.count))
+        );
+
         const track = el('div', 'cso-bar__track');
         const fill = el('div', 'cso-bar__fill');
         fill.style.width = `${Math.max(8, (item.count / maximum) * 100)}%`;
@@ -99,10 +162,12 @@
         row.append(top, track);
         bars.append(row);
       });
+
       distribution.append(bars);
 
       const benchmarkPanel = el('section', 'cso-panel');
       benchmarkPanel.style.gridColumn = 'span 5';
+
       const benchmarkHeader = el('div', 'cso-panel__header');
       const benchmarkHeaderText = el('div');
       benchmarkHeaderText.append(el('h2', '', t.benchmarkSnapshot));
@@ -115,17 +180,25 @@
         const card = el('div', 'cso-card');
         card.style.gridColumn = '1 / -1';
         card.append(el('h3', '', category.label || titleCase(id)));
-        card.append(el('p', '', leader ? `${t.leader}: ${leader.model_name} · ${leader.score}` : '—'));
+        card.append(
+          el(
+            'p',
+            '',
+            leader
+              ? `${t.leader}: ${leader.model_name} · ${leader.score}`
+              : '—'
+          )
+        );
         benchmarkPanel.append(card);
       });
 
       grid.append(distribution, benchmarkPanel);
       container.append(grid);
-
-      const notice = el('p', 'cso-notice', benchmarks.data_notice || t.synthetic);
-      container.append(notice);
+      container.append(
+        el('p', 'cso-notice', benchmarks.data_notice || t.synthetic)
+      );
     } catch (error) {
-      container.append(el('div', 'cso-notice', error.message));
+      container.append(el('div', 'cso-notice', `${t.loadError} ${error.message}`));
     }
   };
 
@@ -133,25 +206,34 @@
     const lang = container.dataset.lang === 'pt' ? 'pt' : 'en';
     const t = labels[lang];
 
+    container.replaceChildren(el('p', 'cso-meta', t.loading));
+
     try {
       const data = await loadJson('skills.json');
       const skills = data.skills || [];
+      container.replaceChildren();
 
       const toolbar = el('div', 'cso-toolbar');
+
       const search = el('input', 'cso-control');
       search.type = 'search';
       search.placeholder = t.search;
       search.setAttribute('aria-label', t.search);
+      search.autocomplete = 'off';
 
       const select = el('select', 'cso-control');
       const all = el('option', '', t.allCategories);
       all.value = '';
       select.append(all);
-      [...new Set(skills.map((skill) => skill.category))].sort().forEach((category) => {
-        const option = el('option', '', titleCase(category));
-        option.value = category;
-        select.append(option);
-      });
+
+      [...new Set(skills.map((skill) => skill.category))]
+        .sort()
+        .forEach((category) => {
+          const option = el('option', '', titleCase(category));
+          option.value = category;
+          select.append(option);
+        });
+
       toolbar.append(search, select);
       container.append(toolbar);
 
@@ -162,7 +244,11 @@
       const table = el('table', 'cso-table');
       const thead = el('thead');
       const headRow = el('tr');
-      [t.name, t.category, t.summary, t.status, t.source].forEach((text) => headRow.append(el('th', '', text)));
+
+      [t.name, t.category, t.summary, t.status, t.source].forEach((text) =>
+        headRow.append(el('th', '', text))
+      );
+
       thead.append(headRow);
       const tbody = el('tbody');
       table.append(thead, tbody);
@@ -170,18 +256,33 @@
       container.append(wrap);
 
       const renderRows = () => {
-        const query = search.value.trim().toLowerCase();
+        const query = normalizeText(search.value.trim());
         const category = select.value;
+
         const filtered = skills.filter((skill) => {
-          const searchable = [
-            skill.display_name, skill.name, skill.category, skill.subcategory,
-            ...(skill.capabilities || []), ...(skill.tags || [])
-          ].join(' ').toLowerCase();
-          return (!query || searchable.includes(query)) && (!category || skill.category === category);
+          const searchable = normalizeText(
+            [
+              skill.display_name,
+              skill.name,
+              skill.category,
+              skill.subcategory,
+              skill.summary_pt,
+              skill.summary_en,
+              ...(skill.capabilities || []),
+              ...(skill.tags || [])
+            ].join(' ')
+          );
+
+          return (
+            (!query || searchable.includes(query)) &&
+            (!category || skill.category === category)
+          );
         });
 
         tbody.replaceChildren();
-        meta.textContent = `${filtered.length} / ${skills.length} · ${t.updated}: ${data.generated_on || '—'}`;
+        meta.textContent = `${filtered.length} / ${skills.length} · ${t.updated}: ${
+          data.generated_on || '—'
+        }`;
 
         if (!filtered.length) {
           const row = el('tr');
@@ -201,11 +302,20 @@
           nameCell.append(el('code', '', skill.name));
 
           const categoryCell = el('td', '', titleCase(skill.category));
-          const summaryCell = el('td', '', lang === 'pt' ? skill.summary_pt : skill.summary_en);
+          const summaryCell = el(
+            'td',
+            '',
+            lang === 'pt' ? skill.summary_pt : skill.summary_en
+          );
 
           const statusCell = el('td');
-          const badge = el('span', `cso-badge cso-badge--${skill.status}`, titleCase(skill.status));
-          statusCell.append(badge);
+          statusCell.append(
+            el(
+              'span',
+              `cso-badge cso-badge--${skill.status}`,
+              titleCase(skill.status)
+            )
+          );
 
           const sourceCell = el('td');
           const link = el('a', '', t.source);
@@ -214,7 +324,13 @@
           link.rel = 'noopener noreferrer';
           sourceCell.append(link);
 
-          row.append(nameCell, categoryCell, summaryCell, statusCell, sourceCell);
+          row.append(
+            nameCell,
+            categoryCell,
+            summaryCell,
+            statusCell,
+            sourceCell
+          );
           tbody.append(row);
         });
       };
@@ -223,25 +339,51 @@
       select.addEventListener('change', renderRows);
       renderRows();
     } catch (error) {
-      container.append(el('div', 'cso-notice', error.message));
+      container.replaceChildren(
+        el('div', 'cso-notice', `${t.loadError} ${error.message}`)
+      );
     }
   };
 
   const initialize = () => {
     document.querySelectorAll('.cso-dashboard').forEach((node) => {
-      if (!node.dataset.initialized) {
+      if (node.dataset.initialized !== 'true') {
         node.dataset.initialized = 'true';
         renderDashboard(node);
       }
     });
+
     document.querySelectorAll('.cso-skills-catalog').forEach((node) => {
-      if (!node.dataset.initialized) {
+      if (node.dataset.initialized !== 'true') {
         node.dataset.initialized = 'true';
         renderCatalog(node);
       }
     });
   };
 
-  document.addEventListener('DOMContentLoaded', initialize);
-  document.addEventListener('DOMContentSwitch', initialize);
+  const subscribeToMaterial = () => {
+    if (
+      typeof document$ !== 'undefined' &&
+      document$ &&
+      typeof document$.subscribe === 'function'
+    ) {
+      document$.subscribe(initialize);
+      return true;
+    }
+    return false;
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        initialize();
+        subscribeToMaterial();
+      },
+      { once: true }
+    );
+  } else {
+    initialize();
+    subscribeToMaterial();
+  }
 })();

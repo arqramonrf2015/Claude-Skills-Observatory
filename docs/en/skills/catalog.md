@@ -1,15 +1,15 @@
 ---
-title: Live Skills Catalog
+title: Interactive Skills Catalog
 language: en
 translation_key: skills-catalog
 translation_status: complete
 ---
 
-# Live Skills Catalog
+# Interactive Skills Catalog
 
-Filter the structured starter catalog by name, category, capability or tag.
+Use the **“Search Skills by subject, name, capability or tag”** field displayed below. The search box in the site header searches documentation pages only.
 
 <div class="cso-skills-catalog" data-lang="en"></div>
 
 !!! info "Provenance"
-    Every verified record stores its upstream repository, source path, blob SHA and verification date. Third-party content remains governed by upstream licenses and terms.
+    Each verified record stores its original repository, source path, blob SHA and verification date. Third-party content remains subject to the licenses and terms of its original source.
